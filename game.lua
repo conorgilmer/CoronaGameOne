@@ -193,41 +193,32 @@ function scene:createScene( event )
 	end
         
         --2nd btn
-        --------------------------------------------
+        ----------------------------------------------------------------
 	-- ***CREATE GAME FUNCTION.***
-	--Create the scenery and the player/jumpfunction
-	--------------------------------------------
-	--Jumping function with some control vars.
+	--Create the scenery and the player/kick/shoot or spit Fn
+	----------------------------------------------------------------
+	--Kicking/Spitting or Shooting function with some control vars.
 	local function playerKick( event )
 		local t = event.target 
+                
+                -- remove bullet as it goes
+                local function bulletDisappear(event)
+                    display.remove(event)
+                    print("bullet disappears")
+                end
 
 		--Only allow this to occur if we haven't died etc.
 		if movementAllowed then
-			if event.phase == "began" then
-				display.getCurrentStage():setFocus( t, event.id )
-				t.isFocus = true; t.alpha = 0.6
-				
-			elseif t.isFocus then
-				if event.phase == "ended" or event.phase == "cancelled" then
-					display.getCurrentStage():setFocus( t, nil )
-					t.isFocus = false; t.alpha = 1
-					
-					floorHit = false	
-					if doubleJump == false then 
-						player:setLinearVelocity( 0, 0 )
-						player:applyForce(0,-8, player.x, player.y)
-						player:setSequence("jump")
-						jumpChannel = audio.play(jumpSound)
-					end
-
-					if singleJump == false then singleJump = true 
-					else doubleJump = true end
-				end
-			end
-
-		--If we aren't allowed to move we need to stop the focus.
+                    if event.phase == "began" then
+                    print("movement allowed shoot")
+                    startx = player.x  - player.contentWidth
+                    starty = player.y - ( player.contentHeight /2 )
+                    bullet = display.newImage("images/bullet.png", startx, starty)
+                    bullet.trans = transition.to(bullet,{x=_W, y=starty, timer=1000, onComplete=bulletDisappear})
+    		--If we aren't allowed to move we need to stop the focus.
 		--If you dont there is a risk of a crash as the scene changes (if your still pressing the button)
-		else
+                    end
+                else
 			display.getCurrentStage():setFocus( t, nil )
 		end
 		return true
