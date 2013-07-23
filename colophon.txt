@@ -1,0 +1,14 @@
+Colophon and Credits
+--------------------
+
+For this assignment various technologies were used and some assets sourced.
+
+GIMP (www.gimp.org) was used to modify images
+Freesounds (www.freesounds.org) was the source of some shound files
+
+
+Technologies
+The Corona SDK was used in this project
+The Sublime text editor was used initially
+The LuaGlider IDE (Trial Version) was also used
+And Eclipse with the LDT plugin was aslo used
