@@ -1,4 +1,4 @@
--------------------------------------------------------------------------
+------------------------------------------------------------------------
 --T and G Apps Ltd.
 --Created by Jamie Trinder
 --www.tandgapps.co.uk
@@ -66,10 +66,23 @@ M = {
 				widthHeight = {50,50},
 				position ={250,160},
 			},
+                        ladders = {
+                        {
+                                filename = "images/ladder.png",
+                                widthHeight = {40,150},
+                                position = {0,270},
+                        },
+                        {
+                                filename = "images/ladder.png",
+                                widthHeight = {40,150},
+                                position = {250,270},
+                        },
+                         
 		},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
+                
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 		},
@@ -177,6 +190,9 @@ M = {
 				position = {300,66},
 			},
 		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {
+		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 			{	
@@ -248,6 +264,10 @@ M = {
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {
+		},
+                
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 		},
@@ -334,6 +354,9 @@ M = {
 				position = {450,166},
 			},
 		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {	
+		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 			{	
@@ -373,6 +396,9 @@ M = {
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {
+		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 		},
@@ -389,6 +415,7 @@ M = {
 		},
 	},
 }
+
 
 
 --Set up the screen bounds..

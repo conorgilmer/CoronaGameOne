@@ -1,22 +1,5 @@
 -------------------------------------------------------------------------
---T and G Apps Ltd.
---Created by Jamie Trinder
---www.tandgapps.co.uk
-
---CoronaSDK version 2012.971 was used for this template.
-
---The art was sourced from http://biffybeebe.net/graphics/
---Created by Biffy Beebe, you would have to purchase the indie Graphics bundle
---yourself in order to use the graphics in this template in your own game.
-
---You are not allowed to publish this template to the Appstore as it is. 
---You need to work on it, improve it and replace the graphics. 
-
---For questions and/or bugs found, please contact me using our contact
---form on http://www.tandgapps.co.uk/contact-us/
 -------------------------------------------------------------------------
-
-
 --Start off by requiring storyboard and creating a scene.
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
@@ -41,8 +24,9 @@ local mF = math.floor
 local firstGroup, objectGroup, enemyGroup, extraGroup
 
 --Sounds
-local coinSound, overSound, winSound, jumpSound
-local coinChannel, jumpChannel, overChannel, winChannel = 2,3,4,5 --Channel vars, used to play sounds, these values change when they are used.
+local coinSound, overSound, winSound, jumpSound, laserSound, gotchaSound
+local coinChannel, jumpChannel, overChannel, winChannel, laserChannel = 2,3,4,5,7
+--Channel vars, used to play sounds, these values change when they are used.
 
 --Game Control Variables
 local moveSide = "right" --Changes when we touch the buttons.
@@ -70,7 +54,7 @@ local player
 local levelspeed = 0 --Will increase when we start running.
 local runSpeed = 8 --How fast the background will move when your running top speed.
 local movementAllowed = true
-
+local bullet
 --Timers and transitions
 local moveTimer
 
@@ -133,12 +117,15 @@ function scene:createScene( event )
 	screenGroup:insert(enemyGroup); screenGroup:insert(extraGroup) 
 
 	--Load the sounds.
-	coinSound = audio.loadSound("sounds/Collect.mp3")
-	overSound = audio.loadSound("sounds/Defeat2.mp3")
-	winSound = audio.loadSound("sounds/LevelClear.mp3")
-	--jumpSound = audio.loadSound("sounds/Jump.mp3")
+        -- sounds sourced from www.freeSFX.co.uk
+	coinSound = audio.loadSound("sounds/cash_register.mp3") -- collect
+	overSound = audio.loadSound("sounds/comedy_trumpet.mp3") -- defeat2
+	winSound = audio.loadSound("sounds/enthusiastic_yes.mp3") -- levelclear)
 
-	jumpSound = audio.loadSound("sounds/HellYeah.ogg")
+        -- sounds sourced from freesounds.org creative commons licence
+        jumpSound = audio.loadSound("sounds/cartoon-jump.wav") -- Jump.mp3
+        laserSound = audio.loadSound("sounds/spaceblaster.wav") -- HellYeah.ogg
+        gotchaSound = audio.loadSound("sounds/blood_splat.mp3") -- HellYeah.ogg
 
 	--------------------------------------------
 	-- ***HUD SETUP***
@@ -192,6 +179,8 @@ function scene:createScene( event )
 		return true
 	end
         
+        
+            
         --2nd btn
         ----------------------------------------------------------------
 	-- ***CREATE GAME FUNCTION.***
@@ -205,18 +194,25 @@ function scene:createScene( event )
                 local function bulletDisappear(event)
                     display.remove(event)
                     print("bullet disappears")
-                end
+                end                
+                -- Take care of collisions
+           
 
 		--Only allow this to occur if we haven't died etc.
 		if movementAllowed then
                     if event.phase == "began" then
                     print("movement allowed shoot")
-                    startx = player.x  - player.contentWidth
+                    laserChannel = audio.play(laserSound)
+                    startx = player.x  - (player.contentWidth /2 )
                     starty = player.y - ( player.contentHeight /2 )
+                    --createBullet(startx,starty)
                     bullet = display.newImage("images/bullet.png", startx, starty)
+                    bullet.name= "bullet"
+                 -- local bulletShape = { -16,-28, 16,-28, 16,31, -16,31 }
+                    physics.addBody( bullet,  "dynamic", { friction=1, bounce=0, shape=bulletShape} )
                     bullet.trans = transition.to(bullet,{x=_W, y=starty, timer=1000, onComplete=bulletDisappear})
-    		--If we aren't allowed to move we need to stop the focus.
-		--If you dont there is a risk of a crash as the scene changes (if your still pressing the button)
+                    --If we aren't allowed to move we need to stop the focus.
+		            --If you dont there is a risk of a crash as the scene changes (if your still pressing the button)
                     end
                 else
 			display.getCurrentStage():setFocus( t, nil )
@@ -249,11 +245,29 @@ function scene:createScene( event )
 		end
 		for i=1, #level[sectionInt]["coins"] do
 			local object = level[sectionInt]["coins"][i]
-			local coin = display.newImageRect(objectGroup, "images/coin.png", 30, 30)
+			local coin = display.newImageRect(objectGroup, "images/euro.png", 30, 30)
 			coin:setReferencePoint(display.BottomCenterReferencePoint);
 			coin.x = object["position"][1]+xOffset; coin.y = object["position"][2]; coin.name = "coin"
 			physics.addBody( coin, "static", { isSensor = true } )
 		end
+              --  for i=1, #level[sectionInt]["ladders"] do
+		--	local object = level[sectionInt]["ladders"][i]
+		--	local ladder = display.newImageRect(objectGroup, "images/flag.png", object["widthHeight"][1], object["widthHeight"][2])
+                  --  ladder:setReferencePoint(display.BottomCenterReferencePoint);
+		--	ladder.x = object["position"][1]+xOffset; 
+		  --      ladder.y = object["position"][2]; ladder.name = "ladder"
+		--	physics.addBody(ladder, "static", { isSensor = true } )
+		--end
+                for i=1, #level[sectionInt]["ladders"] do
+            local object = level[sectionInt]["ladders"][i]
+            local ladder = display.newImageRect(objectGroup, object["filename"], object["widthHeight"][1], object["widthHeight"][2])
+            ladder:setReferencePoint(display.BottomCenterReferencePoint);
+            ladder.x = object["position"][1]+xOffset; ladder.y = object["position"][2];
+            physics.addBody(ladder, "static", {density=0.004, friction=0.3, bounce=0} )
+            ladder.name = "ladder"
+        end
+                
+                
 		for i=1, #level[sectionInt]["spikes"] do
 			local object = level[sectionInt]["spikes"][i]
 			local spike = display.newImageRect(objectGroup, "images/spikes.png", object["widthHeight"][1], object["widthHeight"][2])
@@ -316,7 +330,7 @@ function scene:createScene( event )
 		physics.addBody( player,  "dynamic", { friction=1, bounce=0, shape=playerShape} )	
 		player.isFixedRotation = true 	--To stop it rotating when jumping etc
 		player.isSleepingAllowed = false --To force it to update and fall off playforms correctly.
-
+   
 		--Create a section straight away..
 		createSection()
 	end
@@ -412,7 +426,11 @@ function scene:createScene( event )
 		elseif moveSide == "left" then
 			if player.x <= 0 then player.x = 0
 			elseif player.x >= _W then player.x = _W-1
-			else player:translate(-levelspeed,0) end
+                    else player:translate(-levelspeed,0) end
+                elseif moveSide == "up" then
+                    print("climb up")
+                elseif moveSide == "down" then
+                    print("climb down")
 		end
 	end
 
@@ -457,20 +475,30 @@ function scene:createScene( event )
 	end
 
 	--Create the movement buttons.
-	local jumpButton = display.newImageRect(extraGroup, "images/button.png", 64, 64)
-	jumpButton.x = _W-38; jumpButton.y = _H-34;
+	local jumpButton = display.newImageRect(extraGroup, "images/jbutton.png", 54, 54)
+	jumpButton.x = _W-38; jumpButton.y = _H-24;
 	jumpButton:addEventListener("touch", playerJump)
 
-	local leftButton = display.newImageRect(extraGroup, "images/buttonLeft.png", 64, 64)
-	leftButton.x = 38; leftButton.y = _H-34; leftButton.dir = "left"
+	local leftButton = display.newImageRect(extraGroup, "images/left.png", 54, 54)
+	leftButton.x = 28; leftButton.y = _H-24; leftButton.dir = "left"
 	leftButton:addEventListener("touch", moveButton)
 
-	local rightButton = display.newImageRect(extraGroup, "images/buttonRight.png", 64, 64)
-	rightButton.x = leftButton.x+84; rightButton.y = _H-34; rightButton.dir = "right"
+	local rightButton = display.newImageRect(extraGroup, "images/right.png", 54, 54)
+	rightButton.x = leftButton.x+74; rightButton.y = _H-24; rightButton.dir = "right"
 	rightButton:addEventListener("touch", moveButton)
         
-        local kickButton = display.newImageRect(extraGroup, "images/button.png", 64, 64)
-	kickButton.x = _W-110; kickButton.y = _H-34;
+        local upButton = display.newImageRect(extraGroup, "images/up.png", 50, 50)
+	upButton.x = 162; upButton.y = _H-24; upButton.dir = "up"
+	upButton:addEventListener("touch", moveButton)
+
+	local downButton = display.newImageRect(extraGroup, "images/down.png", 50, 50)
+	downButton.x = upButton.x+74; downButton.y = _H-24; downButton.dir = "down"
+	downButton:addEventListener("touch", moveButton)
+        
+        
+        
+        local kickButton = display.newImageRect(extraGroup, "images/gbutton.png", 54, 54)
+	kickButton.x = _W-110; kickButton.y = _H-24;
 	kickButton:addEventListener("touch", playerKick)
         
 end
@@ -579,7 +607,7 @@ function scene:enterScene( event )
 	local function createCoin(x,y)
 		--Creation needs to be delayed slightly so the world isn't "Number crunching"
 		local function createNow()
-			local coin = display.newImageRect(objectGroup, "images/coin.png", 30, 30)
+			local coin = display.newImageRect(objectGroup, "images/euro.png", 30, 30)
 			coin:setReferencePoint(display.BottomCenterReferencePoint);
 			coin.x = x; coin.y = y-60; coin.name = "coin"
 			physics.addBody( coin, "static", { isSensor = true } )
@@ -587,12 +615,29 @@ function scene:enterScene( event )
 		timer.performWithDelay(10, createNow, 1)
 	end
 
+
+
+
 	--Collision functon. Controls hitting the blocks and coins etc. Also resets the jumping
 	function onCollision(event)
+             print("in coll")
+
 		if event.phase == "began" and gameIsActive == true and gameOverCalled == false then
 			local name1 = event.object1.name
 			local name2 = event.object2.name 
 
+            print ("incollisison")
+            if name1 == "bullet" or name2=="bullet" then
+            	if name1=="enemy" or name2 =="enemy" then
+            		print("GOTCHA")
+            		display.remove(event.object2); event.object2 = nil
+                    display.remove(event.object1); event.object1 = nil
+                    laserChannel = audio.play(gotchaSound)
+                    changeText(-5)
+            	end
+            end
+                                                    
+                            
 			if name1 == "player" or name2 == "player" then 
 				--Hit the floor we reset the jump. Hit a block we run some checks to see
 				--what we should actually be doing.
@@ -669,14 +714,14 @@ function scene:enterScene( event )
 				elseif name1 == "spike" or name2 == "spike" then
 					--Kill player...
 					gameOver()
-				
-				--Player hits an enemy 
+                                --Player hits an enemy 
 				elseif name1 == "enemy" or name2 == "enemy" then
 					--Check to see if we jumped ontop of the enemy.
 					if name1 == "enemy" then
 						--Check to see if we jumped ontop of the enemy
 						if player.y < event.object1.y-(event.object1.height*0.5) then 
 							display.remove(event.object1); event.object1 = nil
+                                                        coinChannel = audio.play(gotchaSound)
 							changeText(10)
 						else
 							gameOver()  	
@@ -720,6 +765,8 @@ function scene:exitScene( event )
 	audio.stop(coinChannel)
 	audio.stop(jumpChannel)
 	audio.stop(winChannel)
+        audio.stop(laserChannel)
+    --    audio.stop(gotchaChannel)
 end
 
 

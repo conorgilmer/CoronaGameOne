@@ -32,8 +32,6 @@ local levelScores = {} --Holds are level information
 local tapChannel, tapSound
 
 
-
-
 ------------------------------------------------
 -- *** STORYBOARD SCENE EVENT FUNCTIONS ***
 ------------------------------------------------
@@ -100,7 +98,7 @@ function scene:createScene( event )
 	for i=1,  amountOfLevels do
 		if i <= #levelScores then
 			--First the sqaure
-			local sqaure = display.newImageRect(screenGroup, "images/block_green_brick.png", 50, 50)
+			local sqaure = display.newImageRect(screenGroup, "images/block_silver_brick.png", 50, 50)
 			sqaure.x = xStart + (rowControl*xOffset)
 			sqaure.y = yStart + (yControl*yOffset); sqaure.id = i
 			sqaure:addEventListener("tap", levelTouched)
