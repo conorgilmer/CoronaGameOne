@@ -36,9 +36,9 @@ local singleJump, doubleJump = false, false
 local gameOverCalled = false --Just incase an extra game over call is made.
 local distChange, distChange2 = 0, 0 --Keeps track of how far we've gone in regards to the contentBounds.
 local gameIsActive = true  --Set to true to start scrolling etc.
-local score = 0  --Points for killing enemies etc.
+local score = levelScore  --Points for killing enemies etc.
 local sectionInt = 1 --Controls the sections being made
-local levelScore = 0 --Reset the levelScore just incase it is still set.
+--local levelScore = 0 --Reset the levelScore just incase it is still set.
 
 
 --BG and display variables.
@@ -47,8 +47,8 @@ local scoreText --Displays our score
 local livesText --Displays lives Left
 local bulletsText --counter for bullets 
 local levelsText --Display the Level
-local lives = 3
-local bullets = 5
+-- local lives = 3 -- lives is a global
+local bullets = 6 --five for level 1 , 4 level2 and 3 for level 3
 --Functions Pre-declared
 --This is done so runtime listeners can be easily removed/added 
 local onCollision, gameLoop
@@ -143,8 +143,9 @@ function scene:createScene( event )
 	scoreText = display.newText(extraGroup, "Score: "..score,0,0,"Arial",17)
 	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
 	scoreText.x = 6; scoreText.y = 14
-
-        -- cg added lives counte
+        -- Adding new Countesrs to the top bar
+        -- cg added lives counters
+        bullets = bullets - currentLevel --(higher/harder level fewer bullets)
         bulletsText = display.newText(extraGroup, "Bullets: "..bullets,0,0,"Arial",17)
 	bulletsText:setReferencePoint(display.CenterRightReferencePoint); bulletsText:setTextColor(50)
 	bulletsText.x = (_W/2) -75; bulletsText.y = 14
@@ -222,7 +223,8 @@ function scene:createScene( event )
 		--Only allow this to occur if we haven't died etc.
 		if movementAllowed then
                     if event.phase == "began" then
-                        if bullets == 0 then
+                        -- cg check there is bullets first
+                        if bullets <= 0 then
                             bulletsText.text = "Bullets: OUT"
                             bulletsText:setReferencePoint(display.CenterRightReferencePoint); 
                             bulletsText.x = (_W/2) -60;                      
@@ -595,6 +597,10 @@ function scene:enterScene( event )
 		--Play the sound..
 		overChannel = audio.play(overSound)
                 levelScore = score
+                print (score)
+                --- lost a life
+                lives = lives -1
+
 		--Stop the gameloop/collision
 		gameIsActive = false
 		gameOverCalled = true

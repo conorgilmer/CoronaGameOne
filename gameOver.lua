@@ -38,8 +38,19 @@ function scene:createScene( event )
 	--------
 	-- *** Create the background and Restart/Menu Button ***
 	--------
-	--Background image first...
+        if lives <= 0 then
+        --Background image first...
 	local bg1 = display.newImageRect( "images/gameOver.jpg", 480,320)
+	bg1.x = _W*0.5; bg1.y = _H*0.5
+        lives =3 --reset for new game
+	screenGroup:insert(bg1)
+	local scoreText = display.newText(screenGroup, "You Scored "..levelScore ,0,0,"Arial",19)
+	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
+	scoreText.x = (_W/2)-85; scoreText.y = (_H/2)+20
+        
+        else
+        --Background image first...
+	local bg1 = display.newImageRect( "images/gameKilled.jpg", 480,320)
 	bg1.x = _W*0.5; bg1.y = _H*0.5
 	screenGroup:insert(bg1)
 	
@@ -49,6 +60,17 @@ function scene:createScene( event )
 	playGame.x = _W*0.5; playGame.y = _H*0.66; playGame.alpha = 0.01
 	playGame:addEventListener("tap", gotoGame)
 	screenGroup:insert(playGame)
+         
+        -- cg added lives counte
+        local livesText = display.newText(screenGroup, "You Have "..lives.. " lives left." ,0,0,"Arial",19)
+	livesText:setReferencePoint(display.CenterLeftReferencePoint); livesText:setTextColor(50)
+	livesText.x = (_W/2)-85; livesText.y = (_H/2)-55
+         -- cg added lives counte
+        local scoreText = display.newText(screenGroup, "Score: "..levelScore ,0,0,"Arial",19)
+	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
+	scoreText.x = (_W/2)-85; scoreText.y = (_H/2)-35
+        
+        end
 	
 	local function gotoMenu() storyboard.gotoScene( "menu", "slideRight", 400 ) end
 	local menu = display.newRect(0,0, 80, 30)
