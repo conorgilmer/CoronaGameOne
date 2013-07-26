@@ -45,7 +45,10 @@ local levelScore = 0 --Reset the levelScore just incase it is still set.
 local bg1, bg2, ground1, ground2, extra1, extra2
 local scoreText --Displays our score
 local livesText --Displays lives Left
+local bulletsText --counter for bullets 
+local levelsText --Display the Level
 local lives = 3
+local bullets = 5
 --Functions Pre-declared
 --This is done so runtime listeners can be easily removed/added 
 local onCollision, gameLoop
@@ -141,10 +144,20 @@ function scene:createScene( event )
 	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
 	scoreText.x = 6; scoreText.y = 14
 
+        -- cg added lives counte
+        bulletsText = display.newText(extraGroup, "Bullets: "..bullets,0,0,"Arial",17)
+	bulletsText:setReferencePoint(display.CenterRightReferencePoint); bulletsText:setTextColor(50)
+	bulletsText.x = (_W/2) -75; bulletsText.y = 14
 
+        -- cg added lives counte
+        levelsText = display.newText(extraGroup, "Level: "..currentLevel,0,0,"Arial",17)
+	levelsText:setReferencePoint(display.CenterRightReferencePoint); levelsText:setTextColor(50)
+	levelsText.x = (_W/2) +25; levelsText.y = 14
+        
+        -- cg added lives counte
         livesText = display.newText(extraGroup, "Lives: "..lives,0,0,"Arial",17)
 	livesText:setReferencePoint(display.CenterRightReferencePoint); livesText:setTextColor(50)
-	livesText.x = _W-106; livesText.y = 14
+	livesText.x = _W-75; livesText.y = 14
 
 
 	--------------------------------------------
@@ -209,22 +222,33 @@ function scene:createScene( event )
 		--Only allow this to occur if we haven't died etc.
 		if movementAllowed then
                     if event.phase == "began" then
-                    print("movement allowed shoot")
-                    laserChannel = audio.play(laserSound)
-                    startx = player.x  - (player.contentWidth /2 )
-                    starty = player.y - ( player.contentHeight /2 )
-                    --createBullet(startx,starty)
-                    bullet = display.newImage("images/bullet.png", startx, starty)
-                    bullet.name= "bullet"
+                        if bullets == 0 then
+                            bulletsText.text = "Bullets: OUT"
+                            bulletsText:setReferencePoint(display.CenterRightReferencePoint); 
+                            bulletsText.x = (_W/2) -60;                      
+                        else 
+                            print("movement allowed shoot")                  
+                            bullets = bullets -1
+                            bulletsText.text = "Bullets: "..bullets
+                            bulletsText:setReferencePoint(display.CenterRightReferencePoint); 
+                            bulletsText.x = (_W/2) -75; 
+                            laserChannel = audio.play(laserSound)
+                            startx = player.x  - (player.contentWidth /2 )
+                            starty = player.y - ( player.contentHeight /2 )
+                            --createBullet
+                            bullet = display.newImage("images/bullet.png", startx, starty)
+                            bullet.name= "bullet"
                  -- local bulletShape = { -16,-28, 16,-28, 16,31, -16,31 }
-                    physics.addBody( bullet,  "dynamic", { friction=1, bounce=0, shape=bulletShape} )
-                    bullet.trans = transition.to(bullet,{x=_W, y=starty, timer=1000, onComplete=bulletDisappear})
+                            physics.addBody( bullet,  "dynamic", { friction=1, bounce=0, shape=bulletShape} )
+                            bullet.trans = transition.to(bullet,{x=_W, y=starty, timer=1000, onComplete=bulletDisappear})
                     --If we aren't allowed to move we need to stop the focus.
 		            --If you dont there is a risk of a crash as the scene changes (if your still pressing the button)
+                    end
                     end
                 else
 			display.getCurrentStage():setFocus( t, nil )
 		end
+                
 		return true
 	end
 

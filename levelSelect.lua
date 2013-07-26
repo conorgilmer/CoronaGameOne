@@ -60,10 +60,12 @@ function scene:createScene( event )
 	--Each level score is placed in the levelScores array. 
 	local dbPath = system.pathForFile("levelScores.db3", system.DocumentsDirectory)
 	local db = sqlite3.open( dbPath ); 
-
+        print "before loop"
 	--Loop through each row and assign the score to our levelScores array.
 	local rowInt = 1
 	for row in db:nrows("SELECT * FROM scores") do   
+                print "electing from db " 
+
 		levelScores[rowInt] = row.highscore
 		rowInt = rowInt + 1
 	end
@@ -95,6 +97,9 @@ function scene:createScene( event )
 	local yStart, yOffset = 100, 80 --Controls the spacing/placement
 
 	local i 
+        levelScores[1] = 11
+        levelScores[2] = 22
+        levelScores[3] = 33
 	for i=1, amountOfLevels do
 		if i <= #levelScores then
 			--First the sqaure
