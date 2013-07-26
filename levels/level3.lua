@@ -67,7 +67,14 @@ M = {
 				position ={250,160},
 			},
                 },
-                    ladders ={};
+                   ladders = {
+                        {
+                                filename = "images/ladder.png",
+                                widthHeight = {40,150},
+                                position = {0,270},
+                        },
+                         
+		},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
@@ -109,7 +116,7 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
-                    ladders ={};
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
@@ -213,8 +220,7 @@ M = {
 				position ={225,120},
 			},
 		},
-                
-                    ladders ={};
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -319,7 +325,7 @@ M = {
 				position ={400,76},
 			},
 		},
-                    ladders ={};
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -351,7 +357,7 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
-                    ladders ={};
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},

@@ -25,7 +25,7 @@ local _W = display.contentWidth --Width and height parameters
 local _H = display.contentHeight 
 local amountOfLevels = 3 --Max number of sqaures to make
 local amountPerRow = 3 --Contorls placement.
-local levelScores = {} --Holds are level information
+levelScores = {} --Holds are level information
 
 
 --Set up some of the sounds we want to use....
@@ -80,7 +80,7 @@ function scene:createScene( event )
 
 		--Set our global level variable to the id of the block we just touched.
 		currentLevel = event.target.id
-
+                print ("current level is " .. event.target.id)
 		--Now change to our game. Which will use the above variable to create the level.
 		storyboard.gotoScene( "game", "slideLeft", 400 )
 	end
@@ -95,7 +95,7 @@ function scene:createScene( event )
 	local yStart, yOffset = 100, 80 --Controls the spacing/placement
 
 	local i 
-	for i=1,  amountOfLevels do
+	for i=1, amountOfLevels do
 		if i <= #levelScores then
 			--First the sqaure
 			local sqaure = display.newImageRect(screenGroup, "images/block_silver_brick.png", 50, 50)

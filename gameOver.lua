@@ -34,7 +34,7 @@ local _H = display.contentHeight
 function scene:createScene( event )
 	print( "gameOver: createScene event")
 	local screenGroup = self.view
-
+    
 	--------
 	-- *** Create the background and Restart/Menu Button ***
 	--------

@@ -78,8 +78,6 @@ function scene:destroyScene( event )
 	audio.dispose( tapSound ); tapSound = nil;
 end
 
-
-
 -----------------------------------------------
 -- Add the story board event listeners
 -----------------------------------------------

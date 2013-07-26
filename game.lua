@@ -38,13 +38,14 @@ local distChange, distChange2 = 0, 0 --Keeps track of how far we've gone in rega
 local gameIsActive = true  --Set to true to start scrolling etc.
 local score = 0  --Points for killing enemies etc.
 local sectionInt = 1 --Controls the sections being made
-levelScore = 0 --Reset the levelScore just incase it is still set.
+local levelScore = 0 --Reset the levelScore just incase it is still set.
 
 
 --BG and display variables.
 local bg1, bg2, ground1, ground2, extra1, extra2
 local scoreText --Displays our score
-
+local livesText --Displays lives Left
+local lives = 3
 --Functions Pre-declared
 --This is done so runtime listeners can be easily removed/added 
 local onCollision, gameLoop
@@ -81,6 +82,8 @@ local playerSprite = {
 	{name="run", start=3, count=3, time = 400, loopCount = 0 },
 	{name="jump", start=1, count=1, time = 1000, loopCount = 1 },
 	{name="stand", start=2, count=1, time = 1000, loopCount = 1 },
+        {name="climb", start=1, count=1, time = 1000, loopCount = 2 },
+
 }
 
 --Enemy
@@ -137,6 +140,11 @@ function scene:createScene( event )
 	scoreText = display.newText(extraGroup, "Score: "..score,0,0,"Arial",17)
 	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
 	scoreText.x = 6; scoreText.y = 14
+
+
+        livesText = display.newText(extraGroup, "Lives: "..lives,0,0,"Arial",17)
+	livesText:setReferencePoint(display.CenterRightReferencePoint); livesText:setTextColor(50)
+	livesText.x = _W-106; livesText.y = 14
 
 
 	--------------------------------------------
@@ -427,10 +435,21 @@ function scene:createScene( event )
 			if player.x <= 0 then player.x = 0
 			elseif player.x >= _W then player.x = _W-1
                     else player:translate(-levelspeed,0) end
-                elseif moveSide == "up" then
+                elseif moveSide == "up" and onaLadder== true then
                     print("climb up")
-                elseif moveSide == "down" then
+                    
+                      
+                 -- player:setLinearVelocity( 1, 1 )
+                  player.y = player.y + 2
+                  player:applyForce(0,-1, player.x, player.y)
+                  player:setSequence("climb"); player:play()
+                  player.xScale = 1
+              --    player.gravityScale = 0.25
+            --      player:setReferencePoint(player.x, player.y)
+                  player.onaLadder = true
+                elseif moveSide == "down" and onaLadder==true then
                     print("climb down")
+                    player:applyForce(0, 9, player.x,player.y)
 		end
 	end
 
@@ -551,13 +570,13 @@ function scene:enterScene( event )
 	local function gameOver()
 		--Play the sound..
 		overChannel = audio.play(overSound)
-
+                levelScore = score
 		--Stop the gameloop/collision
 		gameIsActive = false
 		gameOverCalled = true
 		movementAllowed = false --Stops the movement buttons from working.
 		if moveTimer then timer.cancel(moveTimer); moveTimer = nil; end
-
+                
 		--Rotate and make it look like a death animation..
 		--After the delay/slow down we show the gameOver screen.
 		local function nowEnd()
@@ -620,11 +639,32 @@ function scene:enterScene( event )
 
 	--Collision functon. Controls hitting the blocks and coins etc. Also resets the jumping
 	function onCollision(event)
+            
+            
+             if event.phase == "ended" then
+            local name1 = event.object1.name
+            local name2 = event.object2.name
+
+            if name1 == "ladder" or name2 == "ladder" then
+                if name1 == "player" or name2 == "player" then
+                    onaLadder = false
+                    print("on Ladder = false")
+                end
+            end
+        end
              print("in coll")
 
 		if event.phase == "began" and gameIsActive == true and gameOverCalled == false then
 			local name1 = event.object1.name
 			local name2 = event.object2.name 
+                        
+                        
+                if name1 == "ladder" or name2 == "ladder" then
+                if name1 == "player" or name2 == "player" then
+                    onaLadder = true
+                    print("at Ladder = true")
+                end
+            end
 
             print ("incollisison")
             if name1 == "bullet" or name2=="bullet" then

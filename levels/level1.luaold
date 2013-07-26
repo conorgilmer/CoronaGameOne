@@ -1,4 +1,4 @@
--------------------------------------------------------------------------
+------------------------------------------------------------------------
 --T and G Apps Ltd.
 --Created by Jamie Trinder
 --www.tandgapps.co.uk
@@ -43,20 +43,20 @@ M = {
 				position ={50,160},
 			},
 			{
-				filename = "images/block_green_question.png",
-				type = "special",
+				filename = "images/block_green_brick.png",
+				type = "breakable",
 				widthHeight = {50,50},
 				position ={100,160},
 			},
 			{
-				filename = "images/block_green_brick.png",
-				type = "breakable",
+				filename = "images/block_green_question.png",
+				type = "special",
 				widthHeight = {50,50},
 				position ={150,160},
 			},
 			{
-				filename = "images/block_green_question.png",
-				type = "special",
+				filename = "images/block_green_brick.png",
+				type = "breakable",
 				widthHeight = {50,50},
 				position ={200,160},
 			},
@@ -66,27 +66,29 @@ M = {
 				widthHeight = {50,50},
 				position ={250,160},
 			},
-                },
-                ladders ={};
+                        ladders = {
+                        {
+                                filename = "images/ladder.png",
+                                widthHeight = {40,150},
+                                position = {0,270},
+                        },
+                        {
+                                filename = "images/ladder.png",
+                                widthHeight = {40,150},
+                                position = {250,270},
+                        },
+                         
+		},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
+                
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
-			{	
-				widthHeight = {50,16},
-				position = {300,276},
-			},	
-			{	
-				widthHeight = {50,16},
-				position = {350,276},
-			},
-			{	
-				widthHeight = {50,16},
-				position = {400,276},
-			},
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
+		--To change the enemies you would have to edit the createSections function in game.lua
+		--Currently they are set to one imageSheet for animations, you could easily add more for more enemies.
 		enemies = {
 			{
 				widthHeight = {50,48},
@@ -108,44 +110,102 @@ M = {
 	{
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={150,276},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={200,276},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={250,276},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={300,276},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={200,226},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={250,226},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={300,226},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={250,176},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={300,176},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={300,126},
+			},
 		},
-                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
+			{	
+				widthHeight = {30,42},
+				position = {150,216},
+			},
+			{	
+				widthHeight = {30,42},
+				position = {200,166},
+			},
+			{	
+				widthHeight = {30,42},
+				position = {250,116},
+			},
+			{	
+				widthHeight = {30,42},
+				position = {300,66},
+			},
+		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 			{	
 				widthHeight = {50,16},
-				position = {80,276},
+				position = {350,276},
 			},	
 			{	
 				widthHeight = {50,16},
-				position = {130,276},
-			},	
-			{	
-				widthHeight = {50,16},
-				position = {320,276},
-			},	
-			{	
-				widthHeight = {50,16},
-				position = {370,276},
+				position = {400,276},
 			},	
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
 		enemies = {
-			{
-				widthHeight = {50,48},
-				position ={30,276},
-				allowedMovement = 100, --How far left-right the enemy can walk.
-				speed = -2 --How fast they walk. Start walking left.
-			},
-			{
-				widthHeight = {50,48},
-				position ={260,276},
-				allowedMovement = 100, --How far left-right the enemy can walk.
-				speed = -2 --How fast they walk. Start walking left.
-			},
 		},
 		--Create the level end. (flag) Should only have one of these and in the last screen you make.
 		flags = {
@@ -159,82 +219,57 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
+				filename = "images/block_green_brick.png",
+				type = "breakable",
 				widthHeight = {50,50},
-				position ={50,276},
+				position ={50,160},
 			},
 			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
+				filename = "images/block_green_brick.png",
+				type = "breakable",
 				widthHeight = {50,50},
-				position ={100,276},
-			},
-			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
-				widthHeight = {50,50},
-				position ={150,276},
-			},
-			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
-				widthHeight = {50,50},
-				position ={100,226},
-			},
-			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
-				widthHeight = {50,50},
-				position ={300,276},
-			},
-			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
-				widthHeight = {50,50},
-				position ={350,276},
-			},
-			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
-				widthHeight = {50,50},
-				position ={400,276},
-			},
-			{
-				filename = "images/block_grey_plain.png",
-				type = "plain",
-				widthHeight = {50,50},
-				position ={350,226},
+				position ={100,160},
 			},
 			{
 				filename = "images/block_green_question.png",
 				type = "special",
 				widthHeight = {50,50},
-				position ={225,120},
+				position ={150,160},
+			},
+			{
+				filename = "images/block_green_question.png",
+				type = "special",
+				widthHeight = {50,50},
+				position ={200,160},
+			},
+			{
+				filename = "images/block_green_question.png",
+				type = "special",
+				widthHeight = {50,50},
+				position ={250,160},
+			},
+			{
+				filename = "images/block_push.png",
+				type = "pushable",
+				widthHeight = {50,50},
+				position ={300,260},
+			},
+			{
+				filename = "images/block_push.png",
+				type = "pushable",
+				widthHeight = {50,50},
+				position ={300,200},
 			},
 		},
-                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
-			{	
-				widthHeight = {30,42},
-				position = {100,166},
-			},
-			{	
-				widthHeight = {30,42},
-				position = {350,166},
-			},
 		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {
+		},
+                
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
-			{	
-				widthHeight = {50,16},
-				position = {200,276},
-			},	
-			{	
-				widthHeight = {50,16},
-				position = {250,276},
-			},	
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
 		enemies = {
@@ -252,85 +287,93 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 			{
-				filename = "images/block_push.png",
-				type = "pushable",
+				filename = "images/block_grey_plain.png",
+				type = "plain",
 				widthHeight = {50,50},
-				position ={50,270},
-			},
-			{
-				filename = "images/block_push.png",
-				type = "pushable",
-				widthHeight = {50,50},
-				position ={50,210},
-			},
-			{
-				filename = "images/block_push.png",
-				type = "pushable",
-				widthHeight = {50,50},
-				position ={50,250},
-			},
-			{
-				filename = "images/block_push.png",
-				type = "pushable",
-				widthHeight = {50,50},
-				position ={100,270},
-			},
-			{
-				filename = "images/block_push.png",
-				type = "pushable",
-				widthHeight = {50,50},
-				position ={100,210},
-			},
-			{
-				filename = "images/block_push.png",
-				type = "pushable",
-				widthHeight = {50,50},
-				position ={100,250},
+				position ={150,276},
 			},
 			{
 				filename = "images/block_grey_plain.png",
 				type = "plain",
 				widthHeight = {50,50},
-				position ={400,276},
+				position ={250,276},
 			},
 			{
 				filename = "images/block_grey_plain.png",
 				type = "plain",
 				widthHeight = {50,50},
-				position ={400,226},
+				position ={350,276},
 			},
 			{
 				filename = "images/block_grey_plain.png",
 				type = "plain",
 				widthHeight = {50,50},
-				position ={400,176},
+				position ={450,276},
 			},
 			{
 				filename = "images/block_grey_plain.png",
 				type = "plain",
 				widthHeight = {50,50},
-				position ={400,126},
+				position ={150,226},
 			},
 			{
 				filename = "images/block_grey_plain.png",
 				type = "plain",
 				widthHeight = {50,50},
-				position ={400,76},
+				position ={250,226},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={350,226},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={450,226},
 			},
 		},
-                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
 				widthHeight = {30,42},
-				position = {400,21},
+				position = {150,166},
 			},
+			{	
+				widthHeight = {30,42},
+				position = {250,166},
+			},
+			{	
+				widthHeight = {30,42},
+				position = {350,166},
+			},
+			{	
+				widthHeight = {30,42},
+				position = {450,166},
+			},
+		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {	
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 			{	
 				widthHeight = {50,16},
-				position = {450,276},
+				position = {100,276},
+			},
+			{	
+				widthHeight = {50,16},
+				position = {200,276},
+			},	
+			{	
+				widthHeight = {50,16},
+				position = {300,276},
+			},	
+			{	
+				widthHeight = {50,16},
+				position = {400,276},
 			},	
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
@@ -350,16 +393,14 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
-                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
+                --Create the ladder for this screen. Leave blank for none.
+		ladders = {
+		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
-			{	
-				widthHeight = {50,16},
-				position = {20,276},
-			},	
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
 		enemies = {
@@ -374,6 +415,7 @@ M = {
 		},
 	},
 }
+
 
 
 --Set up the screen bounds..

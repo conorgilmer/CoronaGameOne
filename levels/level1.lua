@@ -1,4 +1,4 @@
-------------------------------------------------------------------------
+-------------------------------------------------------------------------
 --T and G Apps Ltd.
 --Created by Jamie Trinder
 --www.tandgapps.co.uk
@@ -66,12 +66,8 @@ M = {
 				widthHeight = {50,50},
 				position ={250,160},
 			},
-                        ladders = {
-                        {
-                                filename = "images/ladder.png",
-                                widthHeight = {40,150},
-                                position = {0,270},
-                        },
+		},
+                       ladders = {
                         {
                                 filename = "images/ladder.png",
                                 widthHeight = {40,150},
@@ -79,10 +75,12 @@ M = {
                         },
                          
 		},
+
+                
+          
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
-                
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 		},
@@ -171,6 +169,7 @@ M = {
 				position ={300,126},
 			},
 		},
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -189,9 +188,6 @@ M = {
 				widthHeight = {30,42},
 				position = {300,66},
 			},
-		},
-                --Create the ladder for this screen. Leave blank for none.
-		ladders = {
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
@@ -261,13 +257,10 @@ M = {
 				position ={300,200},
 			},
 		},
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
-                --Create the ladder for this screen. Leave blank for none.
-		ladders = {
-		},
-                
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
 		},
@@ -335,6 +328,7 @@ M = {
 				position ={450,226},
 			},
 		},
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -353,9 +347,6 @@ M = {
 				widthHeight = {30,42},
 				position = {450,166},
 			},
-		},
-                --Create the ladder for this screen. Leave blank for none.
-		ladders = {	
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
@@ -393,11 +384,9 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
+                ladders ={};
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
-		},
-                --Create the ladder for this screen. Leave blank for none.
-		ladders = {
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
@@ -415,7 +404,6 @@ M = {
 		},
 	},
 }
-
 
 
 --Set up the screen bounds..

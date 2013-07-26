@@ -64,9 +64,6 @@ db:close() --Then close the database
 
 
 
-
-
-
 -- cg commented out the code displaying the membox
 --local memoryRect = display.newRect(10, 5, 500, 100)
 --		memoryRect:setFillColor(255, 255, 255)
