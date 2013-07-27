@@ -37,6 +37,7 @@ local gameOverCalled = false --Just incase an extra game over call is made.
 local distChange, distChange2 = 0, 0 --Keeps track of how far we've gone in regards to the contentBounds.
 local gameIsActive = true  --Set to true to start scrolling etc.
 local score = levelScore  --Points for killing enemies etc.
+local gameT = gameTime
 local sectionInt = 1 --Controls the sections being made
 --local levelScore = 0 --Reset the levelScore just incase it is still set.
 --local level = _G.currentLevel
@@ -44,6 +45,10 @@ local sectionInt = 1 --Controls the sections being made
 --BG and display variables.
 local bg1, bg2, ground1, ground2, extra1, extra2
 local timerText --Displays time
+
+
+
+
 local scoreText --Displays our score
 local livesText --Displays lives Left
 local bulletsText --counter for bullets 
@@ -144,32 +149,44 @@ function scene:createScene( event )
 	scoreText = display.newText(extraGroup, "Score: "..score,0,0,"Arial",17)
 	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
 	scoreText.x = 6; scoreText.y = 14
-        -- Adding new Countesrs to the top bar
-        -- cg added lives counters
+        -- Adding new Counters to the top bar
+        -- cg added bullets counters
         bullets = bullets - currentLevel --(higher/harder level fewer bullets)
         bulletsText = display.newText(extraGroup, "Bullets: "..bullets,0,0,"Arial",17)
 	bulletsText:setReferencePoint(display.CenterRightReferencePoint); bulletsText:setTextColor(50)
 	bulletsText.x = (_W/2) -75; bulletsText.y = 14
 
-        -- cg added lives counte
+        -- cg added levels counte
         levelsText = display.newText(extraGroup, "Level: "..currentLevel,0,0,"Arial",17)
 	levelsText:setReferencePoint(display.CenterRightReferencePoint); levelsText:setTextColor(50)
 	levelsText.x = (_W/2) +25; levelsText.y = 14
         
-        -- cg added lives counte
-
+        -- cg added lives counter
         livesText = display.newText(extraGroup, "Lives: "..lives,0,0,"Arial",17)
 	livesText:setReferencePoint(display.CenterRightReferencePoint); livesText:setTextColor(50)
-	livesText.x = _W-95; livesText.y = 14
+	livesText.x = _W-125; livesText.y = 14
 
-
-        -- cg added timea
+        -- cg added timer clock
         local startTime = os.time()
 	local levelTime = 60
+	gameT = "00:00"
 --	local displayTime = display.newText(levelTime, 0, 0, "Helvetica", 20)
-        timerText = display.newText("t: "..levelTime ,0,0,"Arial",17)
+    	timerText = display.newText(extraGroup, "Time: 0", 0, 0, "Arial", 17)
 	timerText:setReferencePoint(display.CenterRightReferencePoint); timerText:setTextColor(50)
-	timerText.x = _W-50; livesText.y = 14
+	timerText.x = _W-30; timerText.y = 14
+
+        local function checkTime(event)
+    		local now = os.time()
+	        fulltime = now - startTime
+        	min = math.floor(fulltime/60)
+	        sec = fulltime % 60
+        	if sec < 10 then sec = "0"..sec end
+		        gameT = min..":"..sec
+		        timerText.text = "Time:  "..gameT
+		end
+
+    Runtime:addEventListener("enterFrame", checkTime)
+
 
 	--------------------------------------------
 	-- ***CREATE GAME FUNCTION.***
@@ -307,7 +324,7 @@ function scene:createScene( event )
             local ladder = display.newImageRect(objectGroup, object["filename"], object["widthHeight"][1], object["widthHeight"][2])
             ladder:setReferencePoint(display.BottomCenterReferencePoint);
             ladder.x = object["position"][1]+xOffset; ladder.y = object["position"][2];
-            physics.addBody(ladder, "static", {density=0.004, friction=0.3, bounce=0} )
+            physics.addBody(ladder, "static", {density=0.004, friction=0.3, bounce=0, isSensor =true} )
             ladder.name = "ladder"
         end
                 
@@ -616,6 +633,7 @@ function scene:enterScene( event )
 		--Play the sound..
 		overChannel = audio.play(overSound)
                 levelScore = score
+		gameTime = gameT
                 print (score)
                 --- lost a life
                 lives = lives -1

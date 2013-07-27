@@ -47,6 +47,10 @@ function scene:createScene( event )
 	local scoreText = display.newText(screenGroup, "You Scored "..levelScore ,0,0,"Arial",19)
 	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
 	scoreText.x = (_W/2)-85; scoreText.y = (_H/2)+20
+
+	local timerText = display.newText(screenGroup, "Time: "..gameTime ,0,0,"Arial",19)
+	timerText:setReferencePoint(display.CenterLeftReferencePoint); timerText:setTextColor(50)
+	timerText.x = (_W/2)-85; timerText.y = (_H/2)+ 40
         
         else
         --Background image first...
@@ -61,14 +65,19 @@ function scene:createScene( event )
 	playGame:addEventListener("tap", gotoGame)
 	screenGroup:insert(playGame)
          
-        -- cg added lives counte
+        -- cg added lives counter
         local livesText = display.newText(screenGroup, "You Have "..lives.. " lives left." ,0,0,"Arial",19)
 	livesText:setReferencePoint(display.CenterLeftReferencePoint); livesText:setTextColor(50)
 	livesText.x = (_W/2)-85; livesText.y = (_H/2)-55
-         -- cg added lives counte
+         -- cg added score counter
         local scoreText = display.newText(screenGroup, "Score: "..levelScore ,0,0,"Arial",19)
 	scoreText:setReferencePoint(display.CenterLeftReferencePoint); scoreText:setTextColor(50)
 	scoreText.x = (_W/2)-85; scoreText.y = (_H/2)-35
+
+	local timerText = display.newText(screenGroup, "Time: "..gameTime ,0,0,"Arial",19)
+	timerText:setReferencePoint(display.CenterLeftReferencePoint); timerText:setTextColor(50)
+	timerText.x = (_W/2)-85; timerText.y = (_H/2)-15
+
         
         end
 	

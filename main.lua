@@ -44,6 +44,7 @@ _G.amountofLevels = 3 -- cg is this the ammount of levels available update to 3?
 _G.currentLevel = 1
 _G.levelScore = 0  
 _G.lives = 3
+_G.gameTime = "00:00"
 
 
 --Create a database table for holding the high scores per level in.
