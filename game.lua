@@ -12,7 +12,7 @@ physics.start(); physics.setGravity( 0, 20 ) --Start physics
 
 --We also require the section definitions.
 --These controls positions etc of the Stars and platforms.
-local level = require("levels.level"..3)
+local level = require("levels.level"..currentLevel)
 
 --Maths
 local _W = display.contentWidth
@@ -39,10 +39,11 @@ local gameIsActive = true  --Set to true to start scrolling etc.
 local score = levelScore  --Points for killing enemies etc.
 local sectionInt = 1 --Controls the sections being made
 --local levelScore = 0 --Reset the levelScore just incase it is still set.
-
+--local level = _G.currentLevel
 
 --BG and display variables.
 local bg1, bg2, ground1, ground2, extra1, extra2
+local timerText --Displays time
 local scoreText --Displays our score
 local livesText --Displays lives Left
 local bulletsText --counter for bullets 
@@ -156,10 +157,19 @@ function scene:createScene( event )
 	levelsText.x = (_W/2) +25; levelsText.y = 14
         
         -- cg added lives counte
+
         livesText = display.newText(extraGroup, "Lives: "..lives,0,0,"Arial",17)
 	livesText:setReferencePoint(display.CenterRightReferencePoint); livesText:setTextColor(50)
-	livesText.x = _W-75; livesText.y = 14
+	livesText.x = _W-95; livesText.y = 14
 
+
+        -- cg added timea
+        local startTime = os.time()
+	local levelTime = 60
+--	local displayTime = display.newText(levelTime, 0, 0, "Helvetica", 20)
+        timerText = display.newText("t: "..levelTime ,0,0,"Arial",17)
+	timerText:setReferencePoint(display.CenterRightReferencePoint); timerText:setTextColor(50)
+	timerText.x = _W-50; livesText.y = 14
 
 	--------------------------------------------
 	-- ***CREATE GAME FUNCTION.***
@@ -447,6 +457,7 @@ function scene:createScene( event )
 		--If it isn't we only move the player up to the boundary. We also stop the screen
 		--from going left. Forcing the player to advance through the game.
 		if moveSide == "right" then
+
 			if player.x < _W*0.5 then
 				player:translate(-levelspeed,0) 
 			elseif distChange >= level.screenBounds[2] then
@@ -462,20 +473,28 @@ function scene:createScene( event )
 			elseif player.x >= _W then player.x = _W-1
                     else player:translate(-levelspeed,0) end
                 elseif moveSide == "up" and onaLadder== true then
-                    print("climb up")
-                    
-                      
+                  print("climb up")
                  -- player:setLinearVelocity( 1, 1 )
-                  player.y = player.y + 2
-                  player:applyForce(0,-1, player.x, player.y)
+                --  player.y = player.y + 2
+               --   player:applyForce(0,-1, player.x, player.y)
+                --  player:setSequence("climb"); player:play()
+                --  player.xScale = 1
+                 -- player.onaLadder = true
                   player:setSequence("climb"); player:play()
                   player.xScale = 1
-              --    player.gravityScale = 0.25
-            --      player:setReferencePoint(player.x, player.y)
+		  player.BodyType="kinematic"
+                  player.gravityScale = 0
+		  player.y = player.y -4
                   player.onaLadder = true
+
                 elseif moveSide == "down" and onaLadder==true then
-                    print("climb down")
-                    player:applyForce(0, 9, player.x,player.y)
+                  print("climb down")
+                  player:setSequence("climb"); player:play()
+                  player.xScale = 1
+		  player.BodyType="kinematic"
+                  player.gravityScale = 0
+		  player.y = player.y + 4
+                  player.onaLadder = true
 		end
 	end
 
@@ -679,6 +698,7 @@ function scene:enterScene( event )
                 if name1 == "player" or name2 == "player" then
                     onaLadder = false
                     print("on Ladder = false")
+        	    player.gravityScale = 1
                 end
             end
         end

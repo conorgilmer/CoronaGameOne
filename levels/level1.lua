@@ -397,20 +397,108 @@ M = {
 		--Create the level end. (flag) Should only have one of these and in the last screen you make.
 		--To edit its appearance and functions you would have to edit the createSection function in the game.lua file.
 		flags = {
-			{	
-				widthHeight = {50,160},
-				position = {320,276}, --BottomCenterReferencePoint
-			},	
+	--		{	
+	--			widthHeight = {50,160},
+	--			position = {320,276}, --BottomCenterReferencePoint
+	--		},	
 		},
 	},
-}
+
+	-------------------------------------------
+	--Screen 6
+	-------------------------------------------
+	{
+		--Create the blocks for this screen. Leave blank for none.
+		blocks = {
+		},
+		--Create the Ladders for this screen. Leave blank for none.
+                ladders ={
+		},
+		--Create the Coins for this screen. Leave blank for none.
+		coins = {
+		},
+		--Create the Spikes for this screen. Leave blank for none.
+		spikes = {
+		},
+		--Create some enemies. Very basic walking. Don't create too close to blocks!
+		enemies = {
+		},
+		--Create the level end. (flag) Should only have one of these and in the last screen you make.
+		flags = {
+		},
+	},
+
+
+
+	-------------------------------------------
+	--Screen 7
+	-------------------------------------------
+	{
+		--Create the blocks for this screen. Leave blank for none.
+		blocks = {
+		},
+		--Create the Ladders for this screen. Leave blank for none.
+                ladders ={
+		},
+		--Create the Coins for this screen. Leave blank for none.
+		coins = {
+		},
+		--Create the Spikes for this screen. Leave blank for none.
+		spikes = {
+		},
+		--Create some enemies. Very basic walking. Don't create too close to blocks!
+		enemies = {
+		},
+		--Create the level end. (flag) Should only have one of these and in the last screen you make.
+		flags = {
+		},
+	},
+
+
+
+	-------------------------------------------
+	--Screen 8
+	-------------------------------------------
+	{
+		--Create the blocks for this screen. Leave blank for none.
+		blocks = {
+		},
+		--Create the Ladders for this screen. Leave blank for none.
+                ladders ={
+		},
+		--Create the Coins for this screen. Leave blank for none.
+		coins = {
+		},
+		--Create the Spikes for this screen. Leave blank for none.
+		spikes = {
+		},
+		--Create some enemies. Very basic walking. Don't create too close to blocks!
+		enemies = {
+		},
+		--Create the level end. (flag) Should only have one of these and in the last screen you make.
+		flags = {
+		{	
+				widthHeight = {160,160},
+				position = {320,276}, --BottomCenterReferencePoint
+			},	
+
+
+		},
+	},
+
+
+
+
+
+} --all screens
 
 
 --Set up the screen bounds..
 --Limits you going too far left or right. The first one should ALWAYS be 0.
 --The second value controls how far right in pixels you can travel. 
 --480 = 1 screen, 960 = 2 screens, 1440 = 3 screens, 1920 = 4 screens, 2400 = 5 screens.
-M.screenBounds = {0,2400}
+--8 screens 3 3840
+M.screenBounds = {0,3840}
 
 
 

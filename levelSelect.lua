@@ -97,9 +97,9 @@ function scene:createScene( event )
 	local yStart, yOffset = 100, 80 --Controls the spacing/placement
 
 	local i 
-        levelScores[1] = 11
-        levelScores[2] = 22
-        levelScores[3] = 33
+    --    levelScores[1] = 11
+  --      levelScores[2] = 22
+--        levelScores[3] = 33
 	for i=1, amountOfLevels do
 		if i <= #levelScores then
 			--First the sqaure
