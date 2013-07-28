@@ -1,19 +1,16 @@
 -------------------------------------------------------------------------
---T and G Apps Ltd.
---Created by Jamie Trinder
---www.tandgapps.co.uk
-
---CoronaSDK version 2012.971 was used for this template.
-
---The art was sourced from http://biffybeebe.net/graphics/
---Created by Biffy Beebe, you would have to purchase the indie Graphics bundle
---yourself in order to use the graphics in this template in your own game.
-
---You are not allowed to publish this template to the Appstore as it is. 
---You need to work on it, improve it and replace the graphics. 
-
---For questions and/or bugs found, please contact me using our contact
---form on http://www.tandgapps.co.uk/contact-us/
+-- level2.lua
+--
+-- Berlin - Mario Style Game for the Digital Skills Academy
+-- by Conor Gilmer (conor.gilmer@gmail.com)
+--
+-- 28th of July 2013
+--
+--CoronaSDK version 2013.1076 (2013.4.3) was used for project.
+--Based on the Template given by the DSA from T and G Apps Ltd.
+--
+-- There are 8 Levels in this game
+--
 -------------------------------------------------------------------------
 
 
@@ -67,7 +64,7 @@ M = {
 				position ={250,160},
 			},
                 },
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
@@ -109,7 +106,7 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
@@ -213,7 +210,7 @@ M = {
 				position ={225,120},
 			},
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -318,7 +315,7 @@ M = {
 				position ={400,76},
 			},
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -350,7 +347,7 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
@@ -364,23 +361,155 @@ M = {
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
 		enemies = {
 		},
-		--Create the level end. (flag) Should only have one of these and in the last screen you make.
+		--Create the level end. (bank) Should only have one of these and in the last screen you make.
 		--To edit its appearance and functions you would have to edit the createSection function in the game.lua file.
 		flags = {
-			{	
-				widthHeight = {50,160},
-				position = {320,276}, --BottomCenterReferencePoint
-			},	
 		},
 	},
-}
+
+
+	-------------------------------------------
+	--Screen 6
+	-------------------------------------------
+	{
+		--Create the blocks for this screen. Leave blank for none.
+		blocks = {
+	{
+				filename = "images/block_push.png",
+				type = "pushable",
+				widthHeight = {50,50},
+				position ={50,270},
+			},
+			{
+				filename = "images/block_push.png",
+				type = "pushable",
+				widthHeight = {50,50},
+				position ={50,210},
+			},
+			{
+				filename = "images/block_push.png",
+				type = "pushable",
+				widthHeight = {50,50},
+				position ={50,250},
+			},
+			{
+				filename = "images/block_push.png",
+				type = "pushable",
+				widthHeight = {50,50},
+				position ={100,270},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={400,276},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={400,226},
+			},
+			{
+				filename = "images/block_grey_plain.png",
+				type = "plain",
+				widthHeight = {50,50},
+				position ={400,176},
+			},
+
+		},
+		--Create the Ladders for this screen. Leave blank for none.
+                ladders ={
+		},
+		--Create the Coins for this screen. Leave blank for none.
+		coins = {
+		},
+		--Create the Spikes for this screen. Leave blank for none.
+		spikes = {
+		{	
+				widthHeight = {50,16},
+				position = {200,276},
+			},	
+		},
+		--Create some enemies. Very basic walking. Don't create too close to blocks!
+		enemies = {
+		},
+		--Create the level end. (flag) Should only have one of these and in the last screen you make.
+		flags = {
+		},
+	},
+
+
+
+	-------------------------------------------
+	--Screen 7
+	-------------------------------------------
+	{
+		--Create the blocks for this screen. Leave blank for none.
+		blocks = {
+		},
+		--Create the Ladders for this screen. Leave blank for none.
+                ladders ={
+		},
+		--Create the Coins for this screen. Leave blank for none.
+		coins = {
+		},
+		--Create the Spikes for this screen. Leave blank for none.
+		spikes = {
+		{	
+				widthHeight = {50,16},
+				position = {200,276},
+			},	
+		},
+		--Create some enemies. Very basic walking. Don't create too close to blocks!
+		enemies = {
+		},
+		--Create the level end. (flag) Should only have one of these and in the last screen you make.
+		flags = {
+		},
+	},
+
+
+
+	-------------------------------------------
+	--Screen 8
+	-------------------------------------------
+	{
+		--Create the blocks for this screen. Leave blank for none.
+		blocks = {
+		},
+		--Create the Ladders for this screen. Leave blank for none.
+                ladders ={
+		},
+		--Create the Coins for this screen. Leave blank for none.
+		coins = {
+		},
+		--Create the Spikes for this screen. Leave blank for none.
+		spikes = {
+		
+		},
+		--Create some enemies. Very basic walking. Don't create too close to blocks!
+		enemies = {
+		},
+		--Create the level end. (flag) Should only have one of these and in the last screen you make.
+		flags = {
+		{	
+				widthHeight = {180,180},
+				position = {320,276}, --BottomCenterReferencePoint
+			},	
+
+
+		},
+	}, -- 8th screen
+
+} -- all screens
 
 
 --Set up the screen bounds..
 --Limits you going too far left or right. The first one should ALWAYS be 0.
 --The second value controls how far right in pixels you can travel. 
 --480 = 1 screen, 960 = 2 screens, 1440 = 3 screens, 1920 = 4 screens, 2400 = 5 screens.
-M.screenBounds = {0,2400}
+M.screenBounds = {0,3840}
 
 
 

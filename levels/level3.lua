@@ -1,21 +1,17 @@
 -------------------------------------------------------------------------
---T and G Apps Ltd.
---Created by Jamie Trinder
---www.tandgapps.co.uk
-
---CoronaSDK version 2012.971 was used for this template.
-
---The art was sourced from http://biffybeebe.net/graphics/
---Created by Biffy Beebe, you would have to purchase the indie Graphics bundle
---yourself in order to use the graphics in this template in your own game.
-
---You are not allowed to publish this template to the Appstore as it is. 
---You need to work on it, improve it and replace the graphics. 
-
---For questions and/or bugs found, please contact me using our contact
---form on http://www.tandgapps.co.uk/contact-us/
+-- level3.lua
+--
+-- Berlin - Mario Style Game for the Digital Skills Academy
+-- by Conor Gilmer (conor.gilmer@gmail.com)
+--
+-- 28th of July 2013
+--
+--CoronaSDK version 2013.1076 (2013.4.3) was used for project.
+--Based on the Template given by the DSA from T and G Apps Ltd.
+--
+-- There are 8 Levels in this game
+--
 -------------------------------------------------------------------------
-
 
 --Localise the module. Elimates the need for module package seeall technique.
 local M = {}
@@ -116,7 +112,7 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
@@ -220,7 +216,7 @@ M = {
 				position ={225,120},
 			},
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -325,7 +321,7 @@ M = {
 				position ={400,76},
 			},
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 			{	
@@ -357,7 +353,7 @@ M = {
 		--Create the blocks for this screen. Leave blank for none.
 		blocks = {
 		},
-                ladders ={};
+                ladders ={},
 		--Create the Coins for this screen. Leave blank for none.
 		coins = {
 		},
@@ -391,9 +387,21 @@ M = {
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
+		{	
+				widthHeight = {50,16},
+				position = {200,276},
+			},	
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
 		enemies = {
+
+	{
+				widthHeight = {50,48},
+				position ={250,276},
+				allowedMovement = 180, --How far left-right the enemy can walk.
+				speed = -2 --How fast they walk. Start walking left.
+			},
+
 		},
 		--Create the level end. (flag) Should only have one of these and in the last screen you make.
 		flags = {
@@ -417,9 +425,21 @@ M = {
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
+		{	
+				widthHeight = {50,16},
+				position = {200,276},
+			},	
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
 		enemies = {
+	{
+				widthHeight = {50,48},
+				position ={250,276},
+				allowedMovement = 180, --How far left-right the enemy can walk.
+				speed = -2 --How fast they walk. Start walking left.
+			},
+
+
 		},
 		--Create the level end. (flag) Should only have one of these and in the last screen you make.
 		flags = {
@@ -443,6 +463,7 @@ M = {
 		},
 		--Create the Spikes for this screen. Leave blank for none.
 		spikes = {
+		
 		},
 		--Create some enemies. Very basic walking. Don't create too close to blocks!
 		enemies = {
@@ -450,7 +471,7 @@ M = {
 		--Create the level end. (flag) Should only have one of these and in the last screen you make.
 		flags = {
 		{	
-				widthHeight = {50,160},
+				widthHeight = {180,180},
 				position = {320,276}, --BottomCenterReferencePoint
 			},	
 

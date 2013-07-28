@@ -1,19 +1,12 @@
 -------------------------------------------------------------------------
---T and G Apps Ltd.
---Created by Jamie Trinder
---www.tandgapps.co.uk
-
---CoronaSDK version 2012.971 was used for this template.
-
---The art was sourced from http://biffybeebe.net/graphics/
---Created by Biffy Beebe, you would have to purchase the indie Graphics bundle
---yourself in order to use the graphics in this template in your own game.
-
---You are not allowed to publish this template to the Appstore as it is. 
---You need to work on it, improve it and replace the graphics. 
-
---For questions and/or bugs found, please contact me using our contact
---form on http://www.tandgapps.co.uk/contact-us/
+-- Berlin - Mario Sytle Game for the Digital Skills Academy
+-- by Conor Gilmer (conor.gilmer@gmail.com)
+--
+-- 28th of July 2013
+--
+--CoronaSDK version 2013.1076 (2013.4.3) was used for project.
+--Based on the Template given by the DSA fromT and G Apps Ltd.
+--
 -------------------------------------------------------------------------
 
 --running eclipse ldt and corona
@@ -30,7 +23,7 @@ local storyboard = require "storyboard"
 storyboard.purgeOnSceneChange = true --So it automatically purges for us.
 
 --Create a constantly looping background sound...
-local bgSound = audio.loadStream("sounds/bgSound.ogg")
+local bgSound = audio.loadStream("sounds/bgsound.ogg") -- bgSound.ogg
 audio.reserveChannels(1)   --Reserve its channel
 audio.play(bgSound, {channel=1, loops=-1}) --Start looping the sound.
 

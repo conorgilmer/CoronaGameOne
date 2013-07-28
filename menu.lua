@@ -1,18 +1,12 @@
 -------------------------------------------------------------------------
---T and G Apps Ltd.
---Created by Jamie Trinder
---www.tandgapps.co.uk
-
---CoronaSDK version 2012.971 was used for this template.
-
---The art was sourced from www.vickiwenderlich.com 
---A great site for free art assets
-
---You are not allowed to publish this template to the Appstore as it is. 
---You need to work on it, improve it and replace a lot of the graphics. 
-
---For questions and/or bugs found, please contact me using our contact
---form on http://www.tandgapps.co.uk/contact-us/
+-- Berlin - Mario Sytle Game for the Digital Skills Academy
+-- by Conor Gilmer (conor.gilmer@gmail.com)
+--
+-- 28th of July 2013
+--
+--CoronaSDK version 2013.1076 (2013.4.3) was used for project.
+--Based on the Template given by the DSA from T and G Apps Ltd.
+--
 -------------------------------------------------------------------------
 
 --Start off by requiring storyboard and creating a scene.
@@ -37,7 +31,7 @@ function scene:createScene( event )
 	local screenGroup = self.view
 	
 	--Load the sounds.
-	tapSound = audio.loadSound("sounds/tapsound.wav")
+	tapSound = audio.loadSound("sounds/kbtap.wav") -- tapsound.wav
 
 	--Background images first...
 	local bg1 = display.newImageRect( "images/mainMenu.jpg", 480,320)

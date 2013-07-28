@@ -1,4 +1,15 @@
-
+-------------------------------------------------------------------------
+-- config.lua
+--
+-- Berlin - Mario Style Game for the Digital Skills Academy
+-- by Conor Gilmer (conor.gilmer@gmail.com)
+--
+-- 28th of July 2013
+--
+--CoronaSDK version 2013.1076 (2013.4.3) was used for project.
+--Based on the Template given by the DSA from T and G Apps Ltd.
+--
+-------------------------------------------------------------------------
 -- config.lua
 
 application =

@@ -1,5 +1,16 @@
 -------------------------------------------------------------------------
+-- game.lua
+--
+-- Berlin - Mario Style Game for the Digital Skills Academy
+-- by Conor Gilmer (conor.gilmer@gmail.com)
+--
+-- 28th of July 2013
+--
+--CoronaSDK version 2013.1076 (2013.4.3) was used for project.
+--Based on the Template given by the DSA from T and G Apps Ltd.
+--
 -------------------------------------------------------------------------
+
 --Start off by requiring storyboard and creating a scene.
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
@@ -490,7 +501,7 @@ function scene:createScene( event )
 			elseif player.x >= _W then player.x = _W-1
                     else player:translate(-levelspeed,0) end
                 elseif moveSide == "up" and onaLadder== true then
-                  print("climb up")
+                --  print("climb up")
                  -- player:setLinearVelocity( 1, 1 )
                 --  player.y = player.y + 2
                --   player:applyForce(0,-1, player.x, player.y)
@@ -505,7 +516,7 @@ function scene:createScene( event )
                   player.onaLadder = true
 
                 elseif moveSide == "down" and onaLadder==true then
-                  print("climb down")
+                  --print("climb down")
                   player:setSequence("climb"); player:play()
                   player.xScale = 1
 		  player.BodyType="kinematic"
@@ -715,12 +726,12 @@ function scene:enterScene( event )
             if name1 == "ladder" or name2 == "ladder" then
                 if name1 == "player" or name2 == "player" then
                     onaLadder = false
-                    print("on Ladder = false")
+                    --print("on Ladder = false")
         	    player.gravityScale = 1
                 end
             end
         end
-             print("in coll")
+             --print("in coll")
 
 		if event.phase == "began" and gameIsActive == true and gameOverCalled == false then
 			local name1 = event.object1.name
@@ -730,7 +741,7 @@ function scene:enterScene( event )
                 if name1 == "ladder" or name2 == "ladder" then
                 if name1 == "player" or name2 == "player" then
                     onaLadder = true
-                    print("at Ladder = true")
+                 --   print("at Ladder = true")
                 end
             end
 
