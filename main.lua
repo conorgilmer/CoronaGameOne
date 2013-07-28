@@ -23,7 +23,7 @@ local storyboard = require "storyboard"
 storyboard.purgeOnSceneChange = true --So it automatically purges for us.
 
 --Create a constantly looping background sound...
-local bgSound = audio.loadStream("sounds/bgsound.ogg") -- bgSound.ogg
+local bgSound = audio.loadStream("sounds/bgsound.mp3") -- bgSound.ogg
 audio.reserveChannels(1)   --Reserve its channel
 audio.play(bgSound, {channel=1, loops=-1}) --Start looping the sound.
 

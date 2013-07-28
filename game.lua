@@ -146,8 +146,8 @@ function scene:createScene( event )
 	winSound = audio.loadSound("sounds/enthusiastic_yes.mp3") -- levelclear)
 
         -- sounds sourced from freesounds.org creative commons licence
-        jumpSound = audio.loadSound("sounds/cartoon-jump.wav") -- Jump.mp3
-        laserSound = audio.loadSound("sounds/spaceblaster.wav") -- HellYeah.ogg
+        jumpSound = audio.loadSound("sounds/cartoon-jump.mp3") -- Jump.mp3
+        laserSound = audio.loadSound("sounds/spaceblaster.mp3") -- HellYeah.ogg
         gotchaSound = audio.loadSound("sounds/blood_splat.mp3") -- HellYeah.ogg
 
 	--------------------------------------------

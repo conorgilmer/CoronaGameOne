@@ -36,7 +36,7 @@ function scene:createScene( event )
 	local screenGroup = self.view
 	
 	--Load the sounds.
-	tapSound = audio.loadSound("sounds/tapsound.wav")
+	tapSound = audio.loadSound("sounds/kbtap.mp3")
 
 
 	--------

@@ -31,7 +31,7 @@ function scene:createScene( event )
 	local screenGroup = self.view
 	
 	--Load the sounds.
-	tapSound = audio.loadSound("sounds/kbtap.wav") -- tapsound.wav
+	tapSound = audio.loadSound("sounds/kbtap.mp3") -- tapsound.wav
 
 	--Background images first...
 	local bg1 = display.newImageRect( "images/mainMenu.jpg", 480,320)
